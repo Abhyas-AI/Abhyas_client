@@ -16,7 +16,7 @@ document.getElementById('setupForm').addEventListener('submit', async function(e
     const interviewComponents = {userUUID, domain, experience, interviewFormat, duration };
 
     try {
-        const res = await fetch('http://localhost:5000/info/incomp', {
+        const res = await fetch('https://abhyas-server.onrender.com/info/incomp', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

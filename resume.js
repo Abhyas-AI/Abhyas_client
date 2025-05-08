@@ -615,7 +615,7 @@ Raw text length: ${data.rawTextLength} characters
   output.textContent = formattedOutput;
   resultsCard.style.display = 'block';
 
-  fetch('http://localhost:5000/info/resume', {
+  fetch('https://abhyas-server.onrender.com/info/resume', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

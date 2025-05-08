@@ -74,7 +74,7 @@ async function startInterview() {
         document.getElementById('timer').textContent = '';
         document.querySelector('button').disabled = true;
 
-        const response = await fetch(`http://localhost:5000/interview/${userUUID}`, {
+        const response = await fetch(`https://abhyas-server.onrender.com/interview/${userUUID}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -229,7 +229,7 @@ async function endInterview() {
     document.getElementById('question-text').textContent = 'Submitting your responses...';
     
     try {
-        const response = await fetch(`http://localhost:5000/process-interview/${userUUID}`, {
+        const response = await fetch(`https://abhyas-server.onrender.com/process-interview/${userUUID}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -243,7 +243,7 @@ async function endInterview() {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const audioResponse = await fetch(`http://localhost:5000/save-responses/${userUUID}`, {
+        const audioResponse = await fetch(`https://abhyas-server.onrender.com/save-responses/${userUUID}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -257,7 +257,7 @@ async function endInterview() {
             console.warn('Failed to save responses to Audio collection, but interview processing succeeded');
         }
 
-        const resumeFeedbackResponse = await fetch(`http://localhost:5000/generate-resume-feedback/${userUUID}`, {
+        const resumeFeedbackResponse = await fetch(`https://abhyas-server.onrender.com/generate-resume-feedback/${userUUID}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

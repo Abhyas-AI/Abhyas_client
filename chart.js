@@ -1,7 +1,7 @@
 async function fetchAndRenderChart() {
     try {
         const userUUID = localStorage.getItem('userUUID');
-        const response = await fetch(`http://localhost:5000/results/${userUUID}`);
+        const response = await fetch(`https://abhyas-server.onrender.com/results/${userUUID}`);
         if (!response.ok) {
             throw new Error('Failed to fetch results');
         }
@@ -203,7 +203,7 @@ async function generatePDF() {
         downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
 
         const userUUID = localStorage.getItem('userUUID');
-        const response = await fetch(`http://localhost:5000/results/${userUUID}`);
+        const response = await fetch(`https://abhyas-server.onrender.com/results/${userUUID}`);
         if (!response.ok) {
             throw new Error('Failed to fetch results');
         }

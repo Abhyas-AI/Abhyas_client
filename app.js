@@ -42,7 +42,7 @@ document.querySelector('.btn-submit-reg').addEventListener('click', async (e) =>
     const password = document.getElementById('reg-pass').value;
 
     try {
-        const response = await fetch('http://localhost:5000/register', {
+        const response = await fetch('https://abhyas-server.onrender.com/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })
@@ -73,7 +73,7 @@ document.querySelector('.btn-submit').addEventListener('click', async (e) => {
     }
 
     try {
-        const response = await fetch('http://localhost:5000/verify-otp', {
+        const response = await fetch('https://abhyas-server.onrender.com/verify-otp', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, otp })
@@ -109,7 +109,7 @@ document.querySelector('#SignInBtn').addEventListener('click', async (e) => {
     const password = document.getElementById('log-pass').value;
 
     try {
-        const response = await fetch('http://localhost:5000/login', {
+        const response = await fetch('https://abhyas-server.onrender.com/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -169,7 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-//////
 
 document.querySelector('a[href="/change_pass"]').addEventListener('click', function(e) {
     e.preventDefault();
@@ -182,7 +181,7 @@ document.querySelector('#submitReset').addEventListener('click', async (e) => {
     const email = document.getElementById('reset-email').value.trim().toLowerCase();
     
     try {
-        const response = await fetch('http://localhost:5000/request-password-reset', {
+        const response = await fetch('https://abhyas-server.onrender.com/request-password-reset', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Abhyas - AI Interview Trainer</title>
+    <link rel="icon" href="assets/icon.png" type="image">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="setup.css">
+</head>
+<body>
+    <h1><i class="fas fa-microphone-alt"></i> Abhyas - AI Interview Trainer</h1>
+    
+    <form id="setupForm">
+        <h2>Interview Setup</h2>
+        <h3>1. Enter the role you're preparing for?</h3>
+        <input type="text" id="domain" placeholder="(Eg: Robotics Engineer, Data Scientist, Software Engineer etc.)" required>
+        <h3>2. What is your level of experience in this field?</h3>
+        <select id="experience" required>
+            <option value="" disabled selected>Select your experience level</option>
+            <option value="Fresher">Fresher</option>
+            <option value="1-2 years">1-2 years</option>
+            <option value="3-5 years">3-5 years</option>
+            <option value="5+ years">5+ years</option>
+        </select>
+        <h3>3. What is your preferred interview format?</h3>
+        <select id="interviewFormat" required>
+            <option value="" disabled selected>Select your preferred format</option>
+            <option value="Technical">Technical</option>
+            <option value="HR">HR</option>
+            <option value="Behavioral">Behavioral</option>
+            <option value="Mock">Mock</option>
+        </select>
+        <h3>4. How long would you like the interview to be?</h3>
+        <select id="duration" required>
+            <option value="" disabled selected>Select duration</option>
+            <option value="1 minute">1 minute</option>
+            <option value="5 minutes">5 minutes</option>
+            <option value="10 minutes">10 minutes</option>
+            <option value="15 minutes">15 minutes</option>
+            <option value="30 minutes">30 minutes</option>
+        </select>
+        <button type="submit">NEXT</button>
+    </form>
+
+    <script src="setup.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

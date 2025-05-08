@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="icon" href="assets/icon.png" type="image">
+    <link rel="stylesheet" href="style.css">
+    <title>Abhyas - AI Interview Trainer</title>
+    <style>
+.developer-button {
+    width: 180px;
+    height: 45px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #0D1936 0%, #4A6CF7 100%);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    transition: all 0.3s ease;
+    margin: 0; 
+}
+
+.developer-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.developer-button i {
+    font-size: 20px;
+}
+
+@media (max-width: 768px) {
+    .developer-button {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 20px auto;
+        width: 160px;
+        height: 40px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    .developer-button {
+        width: 140px;
+        height: 36px;
+        font-size: 12px;
+    }
+    
+    .developer-button i {
+        font-size: 16px;
+    }
+}
+    </style>
+</head>
+<body>
+    <button class="developer-button" onclick="window.location.href='aboutdev.html'">
+        <i class='bx bx-code-alt'></i> About Developer
+    </button>
+
+    <div class="container">
+        <div class="imp">
+            <img src="assets/microphone.png" class="symbol"></img>
+            <h1 class="main-title">Abhyas</h1>
+        </div>
+        <h3 class="description">AI Interview Trainer</h3>
+        <p class="sub-description">Abhyas is an AI-powered tool that simulates real interviews, asks questions, and gives instant feedback to boost your confidence and readiness.</p>
+    </div>
+
+    <div class="wrapper">
+        <div class="form-header">
+            <div class="titles">
+                <div class="title-login">Login</div>
+                <div class="title-register">Register</div>
+            </div>
+        </div>
+        <form action="#" class="login-form" autocomplete="off">
+            <div class="input-box">
+                <input type="text" class="input-field" id="log-email" required>
+                <label for="log-email" class="label">Email</label>
+                <i class='bx bx-envelope icon'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-field" id="log-pass" required>
+                <label for="log-pass" class="label">Password</label>
+                <i class='bx bx-lock-alt icon' ></i>
+            </div>
+            <div class="col-2">
+                <a href="/change_pass">Forgot Password</a>
+            </div>
+            <div class="input-box">
+                <button class="btn-submit-lg" id="SignInBtn">Sign In <i class='bx bx-log-in' ></i></button>
+            </div>
+            <div class="switch-form">
+                <span>Don't have an account? <a href="#" onclick="registerFunction()">Register</a></span>
+            </div>
+        </form>
+
+        <form action="#" class="register-form" autocomplete="off">
+            <div class="input-box">
+                <input type="text" class="input-field" id="reg-name" required>
+                <label for="reg-name" class="label">Username</label>
+                <i class='bx bx-user icon'></i>
+            </div>
+            <div class="input-box">
+                <input type="text" class="input-field" id="reg-email" required>
+                <label for="reg-email" class="label">Email</label>
+                <i class='bx bx-envelope icon'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" class="input-field" id="reg-pass" required>
+                <label for="reg-pass" class="label">Set Password</label>
+                <i class='bx bx-lock-alt icon'></i>
+            </div>
+            <div class="input-box">
+                <button type="submit" class="btn-submit-reg">Register</button>
+            </div>
+            <div id="otp-section" class="input-box">
+                <input type="text" class="input-field" id="reg-otp" required>
+                <label for="reg-otp" class="label">OTP</label>
+                <i class='bx bx-key icon'></i>
+            </div>
+            <div class="col-1">
+                <input type="checkbox" id="agree" required>
+                <label for="agree"> I agree to the <a href="#" class="terms-link">Terms</a> and <a href="#" class="privacy-link">Privacy Policy</a></label>
+            </div>
+            <div class="input-box">
+                <button class="btn-submit">Sign Up <i class='bx bx-user-plus'></i></button>
+            </div>
+            <div class="switch-form">
+                <span>Already have an account? <a href="#" onclick="loginFunction()">Login</a></span>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgotPasswordPopup" class="terms-popup">
+        <div class="terms-content">
+            <span class="close-reset-form " onclick="window.location.href='index.html'">&times;</span>
+            <h2>Reset your password</h2>
+            <div class="input-box">
+                <input type="email" class="input-field" id="reset-email" required placeholder="Enter your email">
+                <label for="reset-email" class="label"></label>
+                <i class='bx bx-envelope icon'></i>
+            </div>
+            <button class="btn-submit" id="submitReset">Submit</button>
+            <div id="resetMessage" class="password-reset-error"></div>
+        </div>
+    </div>
+    
+    <div id="termsPopup" class="terms-popup">
+        <div class="terms-content">
+            <span class="close-terms">&times;</span>
+            <h2>Terms and Conditions</h2>
+            <div class="terms-text">
+                <p><em>Last Updated: May 2025</em></p>
+                <ol>
+                    <li>You must be at least 18 years of age to access or use this platform.</li>
+                    <li>You are solely responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</li>
+                    <li>You agree to use this platform only for lawful purposes and in accordance with all applicable local, national, and international laws and regulations.</li>
+                    <li>We reserve the right to modify, update, or replace these Terms and Conditions at any time. Continued use of the platform constitutes acceptance of any changes.</li>
+                    <li>Your personal data will be collected and used in accordance with our <b>Privacy Policy</b>.</li>
+                    <li>This platform is designed to assist with interview preparation and training. We make no guarantees regarding employment outcomes or success in actual interviews.</li>
+                    <li>All materials, content, and AI-generated responses are intended for educational and informational purposes only and should not be considered professional advice.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <div id="privacyPopup" class="terms-popup">
+        <div class="terms-content">
+            <span class="close-privacy">&times;</span>
+            <h2>Privacy Policy</h2>
+            <div class="terms-text">
+                <p><em>Last Updated: May 2025</em></p>
+                <ol>
+                    <li><strong>Information Collection:</strong> We collect personal information such as your email address, username, and responses to interview questions in order to provide and improve our services.</li>
+                    <li><strong>Use of Information:</strong> Your data is utilized solely to enhance your interview training experience, improve our AI models, and offer personalized feedback.</li>
+                    <li><strong>Data Security:</strong> We employ industry-standard security protocols and technologies to protect your personal information from unauthorized access, alteration, or disclosure.</li>
+                    <li><strong>Third-Party Sharing:</strong> We do not sell, trade, or rent your personal data to third parties. Limited data may be shared with trusted partners who help us operate the service, under strict confidentiality agreements.</li>
+                    <li><strong>Cookies and Tracking:</strong> We use cookies and similar technologies to improve functionality, analyze usage patterns, and enhance your overall experience on our platform.</li>
+                    <li><strong>Data Retention:</strong> We retain your information only for as long as necessary to fulfill the purposes outlined in this policy or as required by law.</li>
+                    <li><strong>Your Rights:</strong> You have the right to access, correct, or request deletion of your personal data at any time. To do so, please contact us via our <b>mail</b>.</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>

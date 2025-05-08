@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="assets/icon.png" type="image">
+    <title>Abhyas - AI Interview Trainer</title>
+    <link rel="stylesheet" href="chart.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="button-container">
+        <button class="nav-button" onclick="window.location.href='setup.html'">New Interview</button>
+        <a href="https://chat.whatsapp.com/BaRzN5KlfEh7RMy16M3yju"><button class="nav-button whatsapp">Join Whatsapp</button></a>
+        <button class="nav-button download" id="downloadReportBtn">Download Report</button>
+        <button class="nav-button logout" onclick="window.location.href='index.html'">Logout</button>
+    </div>
+    <div class="analytics-container">
+        <h1>Interview Performance</h1>
+        
+        <div class="abhyas-score-container">
+            <div class="abhyas-score">
+                <span class="abhyas-score-label">Abhyas Score</span>
+                <span class="abhyas-score-value" id="abhyasScoreValue">0</span>
+                <div class="abhyas-score-description">* Average of all 6 evaluation metrics</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="feedbackChart"></canvas>
+        </div>
+        
+        <div class="feedback-container" id="detailedFeedback">
+        </div>
+        <div class="feedback-container" id="resumeFeedback">
+            <h2>Resume Feedback</h2>
+            <div id="resumeFeedbackContent"></div>
+        </div>
+    </div>
+    
+    <div id="pdfContent" style="display: none;"></div>
+    
+    <script src="chart.js"></script>
+</body>
+</html>

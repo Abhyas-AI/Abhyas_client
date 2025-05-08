@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="assets/icon.png" type="image">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+    <title>Abhyas - AI Interview Trainer</title>
+    <link rel="stylesheet" href="interview.css">
+  </head>
+  <body>
+    <div class="container">
+        <div id="AI_Avatar">
+            <img src="/client/assets/AI_Avatar.gif" id="AI" style="width:555px; height:350px; border: 1px solid blue;">
+        </div>
+        <div id="webcam-container">
+            <video id="webcam" autoplay playsinline style="width:555px; height:350px; border:1px solid blue;"></video>
+            <canvas id="canvas"></canvas>
+        </div>
+    </div>
+    <main>
+      <h1>Questions</h1>
+      <div id="question-container">
+        <p id="question-text">Press Start Interview to begin</p>
+        <p id="timer"></p>
+    </div>
+      <img src="/client/assets/voice.gif" alt="Description of the GIF" style="width:300px; height:auto;">
+      <button onclick="startInterview()" id="btnn">Start Interview</button>
+    </main>
+
+    <div class="rules-popup" id="rulesPopup">
+      <div class="rules-content">
+        <button class="close-btn" id="closeRulesBtn">&times;</button>
+        <h1>Interview Rules & Regulations</h1>
+        <ul>
+          <li>No usage of other desktop apps or devices during the interview.</li>
+          <li>Give access permission for the camera and the microphone.</li>
+          <li>Find a quiet, noise-free environment before starting.</li>
+          <li>Avoid long pauses while answering the questions.</li>
+          <li>Stay focused - our AI analyzes your facial expressions and body language.</li>
+          <li>Ensure good lighting so your face is clearly visible.</li>
+          <li>Keep your camera at eye level for best results.</li>
+          <li>Answer each question within the time limit provided.</li>
+          <li>Speak clearly and at a moderate pace.</li>
+          <li>Dress professionally as you would for a real interview.</li>
+          <li>Make sure you have a stable internet connection.</li>
+          <h2 style="text-align: center;">Best of LUCK !!!</h2>
+        </ul>
+      </div>
+    </div>
+    
+    <script src="interview.js"></script>
+    <script type="module">
+import {
+      PoseLandmarker,
+      FaceLandmarker,
+      FilesetResolver,
+      DrawingUtils
+    } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3";
+
+    const video = document.getElementById("webcam");
+    const canvas = document.getElementById("canvas");
+    const ctx = canvas.getContext("2d");
+
+    async function initDetectors() {
+      const vision = await FilesetResolver.forVisionTasks(
+        "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm"
+      );
+
+      const poseLandmarker = await PoseLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath: `https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_lite/float16/1/pose_landmarker_lite.task`,
+          delegate: "GPU"
+        },
+        runningMode: "VIDEO",
+        numPoses: 1
+      });
+
+      const faceLandmarker = await FaceLandmarker.createFromOptions(vision, {
+        baseOptions: {
+          modelAssetPath: `https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task`,
+          delegate: "GPU"
+        },
+        outputFaceBlendshapes: false,
+        runningMode: "VIDEO",
+        numFaces: 1
+      });
+
+      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      video.srcObject = stream;
+
+      video.onloadedmetadata = () => {
+        video.play();
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        requestAnimationFrame(processFrame);
+      };
+
+      const drawingUtils = new DrawingUtils(ctx);
+      const startTime = performance.now();
+
+      async function processFrame() {
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+          const nowInMs = performance.now() - startTime;
+
+          const poseResult = await poseLandmarker.detectForVideo(video, nowInMs);
+          if (poseResult.landmarks.length > 0) {
+            drawingUtils.drawConnectors(poseResult.landmarks[0], PoseLandmarker.POSE_CONNECTIONS, { color: "#3f37c9", lineWidth: 4 });
+            drawingUtils.drawLandmarks(poseResult.landmarks[0], { color: "#4cc9f0", lineWidth: 2 });
+          }
+
+          const faceResult = await faceLandmarker.detectForVideo(video, nowInMs);
+          if (faceResult.faceLandmarks.length > 0) {
+            for (const landmarks of faceResult.faceLandmarks) {
+              drawingUtils.drawConnectors(landmarks, FaceLandmarker.FACE_LANDMARKS_TESSELATION, { color: "#FFD700", lineWidth: 1 });
+              drawingUtils.drawLandmarks(landmarks, { color: "#00BFFF", radius: 1.5 });
+            }
+          }
+        }
+
+        requestAnimationFrame(processFrame);
+      }
+    }
+
+    initDetectors();
+      </script>
+  </body>
+</html>
